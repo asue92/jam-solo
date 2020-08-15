@@ -7,9 +7,6 @@ export interface StepProps {
 }
 
 export class Step extends React.Component<StepProps> {
-  private handleClick = () => {
-    this.props.onClick(this.props.id);
-  };
   render() {
     const stepsStyle = {
       width: "3em",
@@ -27,4 +24,7 @@ export class Step extends React.Component<StepProps> {
       ></div>
     );
   }
+  private handleClick = () => {
+    this.props.onClick(this.props.id);
+  };
 }

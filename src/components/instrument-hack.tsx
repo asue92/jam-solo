@@ -1,10 +1,22 @@
 import * as React from "react";
 
-export default class InstrumentHack extends React.Component<any> {
+export class InstrumentHack extends React.Component<any> {
   constructor(props) {
     super(props);
   }
   render() {
-    return <div>{this.props.children}</div>;
+    const childrenWithProps = React.Children.map(
+      this.props.children,
+      (child) => {
+        if (React.isValidElement(child) && typeof child === "object") {
+          return React.cloneElement(child, {
+            steps: this.props.steps,
+            selected: true,
+          });
+        }
+        return child;
+      }
+    );
+    return <div className="instrument-hack">{childrenWithProps}</div>;
   }
 }

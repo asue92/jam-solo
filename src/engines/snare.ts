@@ -4,10 +4,10 @@ export class Snare implements InstrumentEngine {
   private ctx: AudioContext;
   public tone: number;
   public decay: number;
-  private noise: AudioBufferSourceNode;
-  private noiseEnvelope: GainNode;
-  private osc: OscillatorNode;
-  private oscEnvelope: GainNode;
+  private noise!: AudioBufferSourceNode;
+  private noiseEnvelope!: GainNode;
+  private osc!: OscillatorNode;
+  private oscEnvelope!: GainNode;
   public volume: number;
   constructor(ctx) {
     this.ctx = ctx;
@@ -15,6 +15,7 @@ export class Snare implements InstrumentEngine {
     this.decay = 0.2;
     this.volume = 1;
   }
+
   setup() {
     this.noise = this.ctx.createBufferSource();
     this.noise.buffer = this.noiseBuffer();
@@ -48,6 +49,7 @@ export class Snare implements InstrumentEngine {
 
     return buffer;
   }
+
   trigger(time: number) {
     if (this.volume == 0) {
       return;

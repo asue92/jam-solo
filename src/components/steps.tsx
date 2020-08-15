@@ -5,9 +5,10 @@ export class Steps extends React.Component<any, any> {
   constructor(props) {
     super(props);
   }
+
   render() {
     return (
-      <div className="steps">
+      <div style={{ flex: 1, flexDirection: "row" }}>
         {this.props.steps.map((step, idx) => {
           return (
             <Step

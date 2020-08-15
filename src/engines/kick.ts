@@ -1,4 +1,4 @@
-export class KickDrum {
+export class Kick {
   private ctx: AudioContext;
   public tone: number;
   public decay: number;
@@ -8,10 +8,11 @@ export class KickDrum {
 
   constructor(ctx: AudioContext) {
     this.ctx = ctx;
-    this.tone = 160.1;
-    this.decay = 0.7;
+    this.tone = 167.1;
+    this.decay = 0.5;
     this.volume = 1;
   }
+
   setup() {
     this.osc = this.ctx.createOscillator();
     this.gain = this.ctx.createGain();
@@ -19,8 +20,9 @@ export class KickDrum {
     this.osc.connect(this.gain);
     this.gain.connect(this.ctx.destination);
   }
+
   trigger(time: number) {
-    if (this.volume === 0) {
+    if (this.volume == 0) {
       return;
     }
     this.setup();
@@ -36,11 +38,14 @@ export class KickDrum {
     this.gain.gain.linearRampToValueAtTime(0, time + this.decay + 0.1);
 
     this.osc.start(time);
+
     this.osc.stop(time + this.decay + 0.1);
   }
+
   setTone = (tone: number) => {
     this.tone = tone;
   };
+
   setVolume = (vol: number) => {
     this.volume = vol;
   };

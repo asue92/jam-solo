@@ -13,7 +13,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
-    "tone": "^14.7.39",
+    "tone": "^0.12.80",
     "typescript": "^3.9.7"
   },
   "scripts": {

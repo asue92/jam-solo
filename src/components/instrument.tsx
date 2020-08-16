@@ -42,6 +42,8 @@ export class Instrument extends React.Component<InstrumentProps, any> {
         false,
       ],
     };
+    Transport.bpm.value = 120;
+
     switch (props.engine) {
       case "Kick":
         this.sound = new Kick(this.ctx);

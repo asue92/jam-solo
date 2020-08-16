@@ -4,14 +4,9 @@ import { Steps } from "./steps";
 import { InstrumentHack } from "./instrument-hack";
 import { Transport } from "tone";
 import { PlayPause } from "./play";
+import { BPM } from "./bpm-component";
 import Tone from "tone";
 
-const arpeggiate = (synth, array, now) => {
-  synth.triggerAttackRelease(array[0], now);
-  synth.triggerAttackRelease(array[1], now + 0.01);
-  synth.triggerAttackRelease(array[2], now + 0.02);
-  synth.triggerAttackRelease(array[3], now + 0.03);
-};
 export class TransportComponent extends React.Component<any, any> {
   constructor(props) {
     super(props);
@@ -35,16 +30,10 @@ export class TransportComponent extends React.Component<any, any> {
         false,
       ],
       selected: null,
+      bpm: 120,
     };
     Transport.loop = true;
     Transport.loopEnd = "1m";
-  }
-
-  handleClick() {
-    const synth = new Tone.Synth().toMaster();
-    const notes = ["D4", "F4", "A4", "C5"];
-    const now = Tone.now();
-    arpeggiate(synth, notes, now);
   }
 
   pause = () => {
@@ -52,6 +41,7 @@ export class TransportComponent extends React.Component<any, any> {
   };
 
   play = () => {
+    Tone.context.resume();
     Transport.start();
   };
 
@@ -60,6 +50,28 @@ export class TransportComponent extends React.Component<any, any> {
     s[id] = !s[id];
     this.setState({
       steps: s,
+    });
+  };
+  private handleClickClear = () => {
+    this.setState({
+      steps: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+      ],
     });
   };
 
@@ -90,12 +102,19 @@ export class TransportComponent extends React.Component<any, any> {
       this.setState({ selected, steps });
     }
   };
+  handleBPMChange = (bpm: number) => {
+    Transport.bpm.value = bpm;
+    this.setState({ bpm });
+  };
 
   render() {
     return (
       <div>
         <h1>Jam-Solo</h1>
-        <PlayPause play={this.play} pause={this.pause} />
+        <div style={{ display: "block" }}>
+          <BPM handleChange={this.handleBPMChange} value={this.state.bpm} />
+          <PlayPause play={this.play} pause={this.pause} />
+        </div>
         <InstrumentHack
           steps={this.state.steps}
           selectedInstrument={this.state.selected}
@@ -125,7 +144,7 @@ export class TransportComponent extends React.Component<any, any> {
           handleStepChange={this.handleStepChange}
           steps={this.state.steps}
         />
-        <button onClick={this.handleClick}>Chord</button>
+        <button onClick={this.handleClickClear}>Clear</button>
       </div>
     );
   }

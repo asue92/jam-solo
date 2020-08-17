@@ -21,7 +21,7 @@ export class PlayPause extends React.Component<any, any> {
   };
   render() {
     return (
-      <button onClick={this.handleClick}>
+      <button className="button" onClick={this.handleClick}>
         {this.state.playing ? "Pause" : "Play"}
       </button>
     );

@@ -12,7 +12,7 @@ export class Clap implements InstrumentEngine {
 
   constructor(ctx: AudioContext) {
     this.tone = 130;
-    this.volume = 1;
+    this.volume = 2;
     this.decay = 0.3;
     this.pulseWidth = 0.025;
     this.ctx = ctx;

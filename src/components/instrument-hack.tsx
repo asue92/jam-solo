@@ -6,7 +6,6 @@ export class InstrumentHack extends React.Component<any> {
   }
 
   render() {
-    console.log("the selected si ", this.props.selectedInstrument);
     const childrenWithProps = React.Children.map(
       this.props.children,
       (child) => {

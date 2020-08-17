@@ -6,6 +6,7 @@ import { Transport } from "tone";
 import { PlayPause } from "./play";
 import { BPM } from "./bpm-component";
 import Tone from "tone";
+import { PlayChords } from "./chords";
 
 export class TransportComponent extends React.Component<any, any> {
   constructor(props) {
@@ -110,41 +111,53 @@ export class TransportComponent extends React.Component<any, any> {
   render() {
     return (
       <div>
-        <h1>Jam-Solo</h1>
+        <h1>JAM-SOLO</h1>
         <div style={{ display: "block" }}>
-          <BPM handleChange={this.handleBPMChange} value={this.state.bpm} />
-          <PlayPause play={this.play} pause={this.pause} />
+          <p>
+            {" "}
+            BPM{" "}
+            <BPM handleChange={this.handleBPMChange} value={this.state.bpm} />
+          </p>
+          <div>
+            {" "}
+            <PlayPause play={this.play} pause={this.pause} />
+          </div>
         </div>
-        <InstrumentHack
-          steps={this.state.steps}
-          selectedInstrument={this.state.selected}
-        >
-          <Instrument
-            key="Kick"
-            engine="Kick"
-            handleClick={this.selectInstrument}
-          />
-          <Instrument
-            key="Snare"
-            engine="Snare"
-            handleClick={this.selectInstrument}
-          />
-          <Instrument
-            key="Clap"
-            engine="Clap"
-            handleClick={this.selectInstrument}
-          />
-          <Instrument
-            key="HiHat"
-            engine="HiHat"
-            handleClick={this.selectInstrument}
-          />
-        </InstrumentHack>
+        <div className="instruments">
+          <InstrumentHack
+            steps={this.state.steps}
+            selectedInstrument={this.state.selected}
+          >
+            {" "}
+            <Instrument
+              key="Kick"
+              engine="Kick"
+              handleClick={this.selectInstrument}
+            />
+            <Instrument
+              key="Snare"
+              engine="Snare"
+              handleClick={this.selectInstrument}
+            />
+            <Instrument
+              key="Clap"
+              engine="Clap"
+              handleClick={this.selectInstrument}
+            />
+            <Instrument
+              key="HiHat"
+              engine="HiHat"
+              handleClick={this.selectInstrument}
+            />
+          </InstrumentHack>
+        </div>
+
         <Steps
           handleStepChange={this.handleStepChange}
           steps={this.state.steps}
         />
         <button onClick={this.handleClickClear}>Clear</button>
+        <PlayChords />
       </div>
     );
   }

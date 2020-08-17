@@ -14,11 +14,13 @@ export class BPM extends React.Component<BPMProps> {
   };
   render() {
     return (
-      <input
-        value={this.props.value}
-        onInput={this.handleChange}
-        className="bpm"
-      />
+      <div>
+        <input
+          value={this.props.value}
+          onInput={this.handleChange}
+          className="bpm"
+        />
+      </div>
     );
   }
 }
